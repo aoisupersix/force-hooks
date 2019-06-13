@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# masterブランチへのCommitを禁止する
+if test "`git symbolic-ref HEAD | sed -e 's:^refs/heads/::'`" = master; then
+	echo "do not commit on master branch!!!"
+	exit 1
+fi
