@@ -4,6 +4,8 @@ COMMIT_MSG_FILE=$1
 COMMIT_SOURCE=$2
 SHA1=$3
 
+ISSUE_NO_PATTERN="(#|[Ff][Oo][Rr][Cc][Ee]-)[0-9]{1,}"
+
 get_branch_name() {
   BRANCH_NAME=`git branch | grep \* | awk '{print $2}'`
   if [[ $BRANCH_NAME =~ i[0-9]{1,} ]]; then
@@ -23,8 +25,7 @@ COMMIT_MSG=`get_commit_message`
 
 if [ "${COMMIT_SOURCE}" = "" ] || [ ${COMMIT_SOURCE} = "message" ] || [ ${COMMIT_SOURCE} = "commit" ]; then
   if [ -n ${ISSUE_NO} ]; then
-    echo "$COMMIT_MSG"
-    if [[ $COMMIT_MSG =~ (\#|i|[Ff][Oo][Rr][Cc][Ee]-)[0-9]{1,} ]]; then
+    if [[ ${COMMIT_MSG} =~ ${ISSUE_NO_PATTERN} ]]; then
       :
     else
       mv $COMMIT_MSG_FILE $COMMIT_MSG_FILE.tmp
