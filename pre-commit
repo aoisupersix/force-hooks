@@ -5,3 +5,9 @@ if test "`git symbolic-ref HEAD | sed -e 's:^refs/heads/::'`" = master; then
 	echo "do not commit on master branch!!!"
 	exit 1
 fi
+
+# developブランチへのCommitを禁止する
+if test "`git symbolic-ref HEAD | sed -e 's:^refs/heads/::'`" = develop; then
+	echo "do not commit on develop branch!!!"
+	exit 1
+fi
