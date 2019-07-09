@@ -8,8 +8,8 @@ ISSUE_NO_PATTERN="(#|[Ff][Oo][Rr][Cc][Ee]-|i)[0-9]{1,}"
 
 get_branch_name() {
   BRANCH_NAME=`git branch | grep \* | awk '{print $2}'`
-  if [[ $BRANCH_NAME =~ i(-d)?[0-9]{1,} ]]; then
-    echo "$BRANCH_NAME" | sed -e "s/^.*i\(-d\)\?\([0-9]\+\).*$/\2/g"
+  if [[ $BRANCH_NAME =~ (i|i-d|feature\/|bugfix\/|hotfix\/|release\/|feat\/|fix\/|hfix\/|rel\/)[0-9]{1,} ]]; then
+    echo "$BRANCH_NAME" | sed -e "s/^.*\(i\|i-d\|feature\/\|bugfix\/\|hotfix\/\|release\/\|feat\/\|fix\/\|hfix\/\|rel\/\)\([0-9]\+\).*$/\2/g"
   else
     echo ""
   fi
