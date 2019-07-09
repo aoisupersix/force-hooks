@@ -16,7 +16,7 @@ get_branch_name() {
 }
 
 get_commit_message() {
-  MSG=`cat ${COMMIT_MSG_FILE} | sed -e ':a' -e 'N' -e '$!ba' -e 's/\n/ /g'`
+  MSG=`cat ${COMMIT_MSG_FILE} | grep -v -e '^#' -e '^\s*$' | sed -e ':a' -e 'N' -e '$!ba' -e 's/\n/ /g'`
   echo "${MSG}"
 }
 
